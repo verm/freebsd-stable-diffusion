@@ -129,7 +129,7 @@ Example.
 Conda
 -----
 
-Install miniconda from ports using pkg and install Linux Conda.
+Install [miniconda](https://docs.conda.io/en/latest/miniconda.html) from ports using pkg to install Linux Conda.
 
 
 ```
