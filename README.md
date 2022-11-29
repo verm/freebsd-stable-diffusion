@@ -27,6 +27,7 @@ If you wish to install the official repository none of the contents in this
 documentation should change other than checking out the official repository.
 
 
+
 Verify and setup CUDA
 ---------------------
 
@@ -40,6 +41,7 @@ directly but the version used for Linux binaries below.
 
 Install **libc6-shim** to get the `nvidia-sglrun` binary.
 
+
 ```
   # pkg install libc6-shim
 ```
@@ -51,6 +53,7 @@ Check for support using `nvidia-smi`.  Here's a good writeup on what this utilit
 displays [Explained Output of Nvidia-smi 
 Utility](https://medium.com/analytics-vidhya/explained-output-of-nvidia-smi-utility-fc4fbee3b124).
 
+
 ```
   # nvidia-smi
   Mon Nov 21 15:25:35 2022
@@ -60,7 +63,9 @@ Utility](https://medium.com/analytics-vidhya/explained-output-of-nvidia-smi-util
   <snip>
 ```
 
+
 Now use it with `nvidia-sglrun`
+
 
 ```
   # nv-sglrun nvidia-smi
@@ -84,26 +89,32 @@ also written by shkhln.
 
 First install **linux-c7-devtools**.
 
+
 ```
   # pkg install linux-c7-devtools
-
 ```
 
+
 Next get **uvm_ioctl_override.c**.
+
 
 
 ```
   # fetch https://gist.githubusercontent.com/shkhln/40ef290463e78fb2b0000c60f4ad797e/raw/f640983249607e38af405c95c457ce4afc85c608/uvm_ioctl_override.c
 ```
 
+
 Build.
+
 
 ```
   # /compat/linux/bin/cc --sysroot=/compat/linux -m64 -std=c99 -Wall -ldl -fPIC -shared -o dummy-uvm.so uvm_ioctl_override.c
 ```
 
+
 This will be tested later as the Linux nvidia-smi works due to the Linux NVIDIA 
 libraries.
+
 
 
 Initial setup
@@ -114,11 +125,13 @@ we'll install everything under the same path and use **${PATH}** going forward.
 
 Example.
 
+
 ```
   # PATH="/path/to/somewhere/"
   # mkdir ${PATH}
   # cd ${PATH}
 ```
+
 
  1. When we change a directory assume all the following commands are run 
     under that directory unless we change again.
@@ -136,6 +149,7 @@ Install [miniconda](https://docs.conda.io/en/latest/miniconda.html) from ports u
   # pkg install linux-miniconda-installer
   # miniconda-installer
 ```
+
 
   1. Review license and accept license with **yes**.
   1. For a path enter `${PATH}/conda`
@@ -162,6 +176,7 @@ the trouble.
   # conda activate
   (base) #
 ```
+
 
 The **(base)** lets us know we are in the base environment.
 
@@ -190,6 +205,7 @@ will activate it to install **PyTorch** into it.
   (base) # conda activate pytorch
 ```
 
+
 Let's make sure pip is in the right location.
 
 
@@ -197,6 +213,7 @@ Let's make sure pip is in the right location.
   (pytorch) # which pip
   ${PATH}/conda/envs/pytorch/bin/pip
 ```
+
 
 Note the **(pytorch)** in brackets.
 
@@ -206,6 +223,7 @@ This installs the [PyTorch](https://pytorch.org/) distribution with **CUDA**.
 ```
   # pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
 ```
+
 
 Let's see if it works
 
@@ -217,7 +235,10 @@ UserWarning: CUDA initialization: CUDA unknown error - this may be due to an inc
   False
 ```
 
+
 Now let's try using the shim.
+
+
 
 ```
   (sd) # LD_PRELOAD="${PATH}/dummy-uvm.so" python3 -c 'import torch; torch.cuda.is_available()'
@@ -227,7 +248,10 @@ Now let's try using the shim.
   NVIDIA GeForce RTX 3060
 ```
 
+
 You're free to install Stable Diffusion as well it will use its own env.
+
+
 
 Stable Diffusion WebUI
 ----------------------
@@ -242,10 +266,12 @@ separate environments so you can avoid version clashing.
 > If you installed **PyTorch** above it's safe to run `conda activate` here.
 
 
+
 ```
   # conda activate
   (base) # git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui
 ```
+
 
 > **Note**
 > Here is where you will switch the repository for 
@@ -255,11 +281,11 @@ separate environments so you can avoid version clashing.
 > used below.
 
 
-
 ```
   (base) # cd stable-diffusion-webui
   (base) # conda env update --file environment-wsl2.yaml --prune
 ```
+
 
 You can use this command to update packages when required.  The `--prune` 
 command will remove any old packages that aren't used which is very useful for 
@@ -267,11 +293,14 @@ debugging.
 
 Let's switch to the **automatic** env now.
 
+
+
 ```
   (base) # conda activate automatic
   (automatic) # which python3
   ${PATH}/conda/envs/automatic/bin/python3
 ```
+
 
 Great.
 
@@ -284,9 +313,12 @@ Hugging Face](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original)
 Download either `sd-v1-4.ckpt` or `sd-v1-4-full-ema.ckpt` depending on which you 
 want to use
 
+
+
 ```
   (automatic) mv sd-v1-4.ckpt ${PATH}/stable-diffusion-webui/models/Stable-diffusion/model.ckpt
 ```
+
 
 **model.ckpt** is the default model that will load.  You can have as many as you 
 want and load them via the commandline.
@@ -299,12 +331,14 @@ Now to install **Git** to allow `launch.py` to install dependencies.
   (automatic) # conda install git
 ```
 
+
 Next step is to run `launch.py`
 
 
 ```
   (automatic) # LD_PRELOAD=${PATH}/dummy-uvm.so  python3 launch.py
 ```
+
 
 You will see some output as it installs required dependencies.
 
@@ -338,6 +372,7 @@ Running on local URL:  http://127.0.0.1:7860
 To create a public link, set `share=True` in `launch()`.
 
 ```
+
 
 That's it!  You can browse to `http://127.0.0.1:7860` and use the WebUI as you 
 wish!
