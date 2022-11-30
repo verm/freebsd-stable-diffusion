@@ -307,8 +307,8 @@ Great.
 
 ### Models
 
-Signup and download the [1.4 Model from 
-Hugging Face](https://huggingface.co/CompVis/stable-diffusion-v-1-4-original)
+Signup and download the [1.5 Model from 
+Hugging Face](https://huggingface.co/runwayml/stable-diffusion-v1-5)
 
 Download either `sd-v1-4.ckpt` or `sd-v1-4-full-ema.ckpt` depending on which you 
 want to use
