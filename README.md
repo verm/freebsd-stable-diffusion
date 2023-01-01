@@ -9,6 +9,7 @@ This tutorial was written on FreeBSD 13.1.
 * [Conda](#conda)
 * [PyTorch](#pytorch)
 * [Stable Diffusion WebUI](#stable-diffusion-webui)
+* [Submitting requests or changes](#submitting-requests-or-changes)
 
 ### Notes
 For now this only covers those with an [NVIDIA](https://www.nvidia.com/) card 
@@ -379,3 +380,13 @@ wish!
 
 The `launch.py` command takes quite a few arguments you can find by running it 
 with `--help`.
+
+
+Submitting requests or changes
+------------------------------
+
+Feel free to open a ticket with any requests or suggested changes.  Pull 
+requests are also welcome.
+
+This document was rendered locally using the excellent instant parser 
+[Grip](https://github.com/joeyespo/grip).
