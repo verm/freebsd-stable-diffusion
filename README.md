@@ -310,8 +310,8 @@ Great.
 Signup and download the [1.5 Model from 
 Hugging Face](https://huggingface.co/runwayml/stable-diffusion-v1-5)
 
-Download either `sd-v1-4.ckpt` or `sd-v1-4-full-ema.ckpt` depending on which you 
-want to use
+Download either `v1-5-pruned-emaonly.ckpt` or `v1-5-pruned.ckpt` depending on which you 
+want to use and your amount of VRAM.
 
 
 
