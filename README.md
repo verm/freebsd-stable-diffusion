@@ -17,7 +17,8 @@ with CUDA support.
 
 You must have the 
 [Linuxulator](https://docs.freebsd.org/en/books/handbook/linuxemu/) installed 
-for any of this to work.
+for any of this to work.  It has only been tested with the default CentOS from 
+ports.
 
 This does not use the official [Stable 
 Diffusion](https://github.com/CompVis/stable-diffusion) repository but the 
