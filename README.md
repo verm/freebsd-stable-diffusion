@@ -244,10 +244,10 @@ Now let's try using the shim.
 
 
 ```
-  (sd) # LD_PRELOAD="${PATH}/dummy-uvm.so" python3 -c 'import torch; torch.cuda.is_available()'
+  (pytorch) # LD_PRELOAD="${PATH}/dummy-uvm.so" python3 -c 'import torch; torch.cuda.is_available()'
   True
 
-  (sd) # LD_PRELOAD="${PATH}/dummy-uvm.so" python3 -c 'import torch; print(torch.cuda.get_device_name(0))'
+  (pytorch) # LD_PRELOAD="${PATH}/dummy-uvm.so" python3 -c 'import torch; print(torch.cuda.get_device_name(0))'
   NVIDIA GeForce RTX 3060
 ```
 
