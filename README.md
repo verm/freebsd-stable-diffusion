@@ -195,8 +195,9 @@ dedicated environment.  All subsequent commands will be run in this environment.
 
 Create a new environment.  This may give a warning about updating Conda you can 
 ignore this and update later if you wish by following the command suggested 
-after activating Conda as above.  We will call it `sd` here.  After creation we 
-will activate it to install **PyTorch** into it.
+after activating Conda as above.  We will call it `pytorch` as denoted by the 
+`--name` argument.  After creation we will activate it to install **PyTorch** 
+into it.
 
 > **Note**
 > Make sure you hit **y** when it asks you to proceed
