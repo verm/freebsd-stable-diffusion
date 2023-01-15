@@ -122,16 +122,18 @@ libraries.
 Initial setup
 -------------
 
-Pick a path where you want to install everything.  To keep things easy 
-we'll install everything under the same path and use **${PATH}** going forward.
+Pick a path where you want to install everything.  To keep things easy we'll 
+install everything under the same path and use **${BASE_PATH}** going forward.  
+This is used for demonstration purposes in this document and not meant to be 
+applied anywhere.
 
 Example.
 
 
 ```
-  # PATH="/path/to/somewhere/"
-  # mkdir ${PATH}
-  # cd ${PATH}
+  # BASE_PATH="/path/to/somewhere/"
+  # mkdir ${BASE_PATH}
+  # cd ${BASE_PATH}
 ```
 
 
@@ -154,7 +156,7 @@ Install [miniconda](https://docs.conda.io/en/latest/miniconda.html) from ports u
 
 
   1. Review license and accept license with **yes**.
-  1. For a path enter `${PATH}/conda`
+  1. For a path enter `${BASE_PATH}/conda`
      - Example `/path/to/somewhere/conda`
   2. When it asks to run conda init select **no**.
   3. Yes to remove `Miniconda3-latest-Linux-x86_64.sh`.
@@ -174,7 +176,7 @@ the trouble.
 
 ```
   # bash
-  # source ${PATH}/etc/profile.d/conda.sh
+  # source ${BASE_PATH}/etc/profile.d/conda.sh
   # conda activate
   (base) #
 ```
@@ -214,7 +216,7 @@ Let's make sure pip is in the right location.
 
 ```
   (pytorch) # which pip
-  ${PATH}/conda/envs/pytorch/bin/pip
+  ${BASE_PATH}/conda/envs/pytorch/bin/pip
 ```
 
 
@@ -233,7 +235,7 @@ Let's see if it works
 
 ```
   # python3 -c 'import torch; print(torch.cuda.is_available())'
-  ${PATH}/conda/envs/sd/lib/python3.9/site-packages/torch/cuda/__init__.py:83: 
+  ${BASE_PATH}/conda/envs/sd/lib/python3.9/site-packages/torch/cuda/__init__.py:83: 
 UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at  ../c10/cuda/CUDAFunctions.cpp:109.)  return torch._C._cuda_getDeviceCount() > 0
   False
 ```
@@ -244,10 +246,10 @@ Now let's try using the shim.
 
 
 ```
-  (pytorch) # LD_PRELOAD="${PATH}/dummy-uvm.so" python3 -c 'import torch; print(torch.cuda.is_available())'
+  (pytorch) # LD_PRELOAD="${BASE_PATH}/dummy-uvm.so" python3 -c 'import torch; print(torch.cuda.is_available())'
   True
 
-  (pytorch) # LD_PRELOAD="${PATH}/dummy-uvm.so" python3 -c 'import torch; print(torch.cuda.get_device_name(0))'
+  (pytorch) # LD_PRELOAD="${BASE_PATH}/dummy-uvm.so" python3 -c 'import torch; print(torch.cuda.get_device_name(0))'
   NVIDIA GeForce RTX 3060
 ```
 
@@ -301,7 +303,7 @@ Let's switch to the **automatic** env now.
 ```
   (base) # conda activate automatic
   (automatic) # which python3
-  ${PATH}/conda/envs/automatic/bin/python3
+  ${BASE_PATH}/conda/envs/automatic/bin/python3
 ```
 
 
@@ -319,7 +321,7 @@ want to use and your amount of VRAM.
 
 
 ```
-  (automatic) mv sd-v1-4.ckpt ${PATH}/stable-diffusion-webui/models/Stable-diffusion/model.ckpt
+  (automatic) mv sd-v1-4.ckpt ${BASE_PATH}/stable-diffusion-webui/models/Stable-diffusion/model.ckpt
 ```
 
 
@@ -339,7 +341,7 @@ Next step is to run `launch.py`
 
 
 ```
-  (automatic) # LD_PRELOAD=${PATH}/dummy-uvm.so  python3 launch.py
+  (automatic) # LD_PRELOAD=${BASE_PATH}/dummy-uvm.so  python3 launch.py
 ```
 
 
@@ -358,13 +360,13 @@ Cloning BLIP into repositories/BLIP...
 Installing requirements for CodeFormer
 Installing requirements for Web UI
 Launching Web UI with arguments: 
-${PATH}/conda/envs/automatic/lib/python3.10/site-packages/psutil/_pslinux.py:513: RuntimeWarning: shared, active, inactive memory stats couldn't be determined and were set to 0  warnings.warn(msg, RuntimeWarning)
+${BASE_PATH}/conda/envs/automatic/lib/python3.10/site-packages/psutil/_pslinux.py:513: RuntimeWarning: shared, active, inactive memory stats couldn't be determined and were set to 0  warnings.warn(msg, RuntimeWarning)
 LatentDiffusion: Running in eps-prediction mode
 DiffusionWrapper has 859.52 M params.
 making attention of type 'vanilla' with 512 in_channels
 Working with z of shape (1, 4, 32, 32) = 4096 dimensions.
 making attention of type 'vanilla' with 512 in_channels
-Loading weights [7460a6fa] from ${PATH}/stable-diffusion-webui/models/Stable-diffusion/model.ckpt
+Loading weights [7460a6fa] from ${BASE_PATH}/stable-diffusion-webui/models/Stable-diffusion/model.ckpt
 Global Step: 470000
 Applying cross attention optimization (Doggettx).
 Model loaded.
