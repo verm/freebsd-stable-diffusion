@@ -121,6 +121,21 @@ libraries.
 
 Initial setup
 -------------
+There are two steps for the initial setup.  Installing missing packages and choosing a path.
+
+
+Packages
+--------
+You will need to install the following packages:
+
+|Package name      |Purpose             |
+|------------------|--------------------|
+|linux-c7-libglvnd |`libGL.so.1`        |
+
+
+
+Installation Path
+-----------------
 
 Pick a path where you want to install everything.  To keep things easy we'll 
 install everything under the same path and use **${BASE_PATH}** going forward.  
@@ -140,6 +155,7 @@ Example.
  1. When we change a directory assume all the following commands are run 
     under that directory unless we change again.
  2. '#' is a shell login does not reflect being **root**.
+
 
 
 
