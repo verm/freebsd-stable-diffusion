@@ -126,11 +126,29 @@ There are two steps for the initial setup.  Installing missing packages and choo
 
 Packages
 --------
+
 You will need to install the following packages:
 
 |Package name      |Purpose             |
 |------------------|--------------------|
 |linux-c7-libglvnd |`libGL.so.1`        |
+
+
+Binaries
+--------
+
+Starting in `FreeBSD` 13.1 `md5sum` exists at `/sbin/md5sum`.  The installer 
+requires this binary.  A quick and relativly safe solution to this is to add a 
+link to ~/bin for example:
+
+
+```
+  # mkdir -p ~/bin
+  # ln -sf /sbin/md5 ~/bin/md5sum
+```
+
+Ensure that `~/bin` is in your `$PATH`.  If you are on `FreeBSD` 13.1 or newer 
+you do not need to do this.
 
 
 
